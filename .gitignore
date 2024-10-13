@@ -2,3 +2,4 @@
 venv
 tmp
 finance_bot.db
+__pycache__

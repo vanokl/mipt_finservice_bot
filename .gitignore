@@ -3,3 +3,4 @@ venv
 tmp
 app_data/finance_bot.db
 __pycache__
+.env

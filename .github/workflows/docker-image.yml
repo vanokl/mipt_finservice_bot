@@ -43,6 +43,7 @@ jobs:
             sudo docker pull vanokl/chat-bot-mipt
             sudo nohup docker run -d -it \
             -e API_TOKEN=${{ secrets.API_TOKEN }} \
+            -e DB_PATH=${{ secrets.DB_PATH }} \
             -v /home/access/app_data:/app/app_data \
             --name main_container \
             vanokl/chat-bot-mipt

@@ -76,7 +76,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         currency_code = 'USD'
         rate = await get_currency_rate(currency_code)
 
-        # Проверяем, что функция вернула  правильный курс
+        # Проверяем, что функция вернула правильный курс
         self.assertEqual(rate, 1 / 75.0)
 
     @patch('requests.get')

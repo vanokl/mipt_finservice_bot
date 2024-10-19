@@ -21,6 +21,14 @@ class AddIncomeExpense(StatesGroup):
     set_description = State()
     result = State()
 
+async def insert_in_db(user_id, amount, user_data):
+
+    conn = sqlite3.connect('finance_bot.db')
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO transactions (user_id, amount, date, description) VALUES (?, ?, CURRENT_TIMESTAMP, ?)",
+                   (user_id, amount, user_data ))
+    conn.commit()
+    conn.close()
 
 @router.message(F.text.lower().in_({"добавить расход", "добавить доход"}) )
 async def value_set(message: Message, state: FSMContext):
@@ -51,12 +59,9 @@ async def result_show(message: Message, state: FSMContext):
     await message.answer(
         text="Запись добавлена"
     )
-    conn = sqlite3.connect('finance_bot.db')
-    cursor = conn.cursor()
-    cursor.execute("INSERT INTO transactions (user_id, amount, date, description) VALUES (?, ?, CURRENT_TIMESTAMP, ?)",
-                   (message.from_user.id, float(user_data['amount']), user_data['description'] ))
-    conn.commit()
-    conn.close()
+
+    await insert_in_db(message.from_user.id, float(user_data['amount']), user_data['description'])
+
     await state.set_state(Common.cmd_start)
     await message.answer(
         text="Выберите действие",

@@ -19,7 +19,7 @@ class TestDatabaseFunctions(unittest.TestCase):
     @ignore_warnings
     async def get_user_amount(self, user_id):
 
-        conn = sqlite3.connect('finance_bot.db')
+        conn = sqlite3.connect('app_data/finance_bot.db')
         cursor = conn.cursor()
         cursor.execute(
             "select amount from transactions where user = 12345 and description = 'Оплата за услуги';")

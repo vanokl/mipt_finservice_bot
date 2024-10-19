@@ -1,10 +1,10 @@
 import asyncio
 import logging
-import os
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 from utils import db_start
 from handlers import common, add_income_expense, get_currency, get_report
+from dotenv import dotenv_values
 
 
 async def main():
@@ -14,10 +14,11 @@ async def main():
     )
     await db_start()
 
-
-    API_TOKEN = os.environ['API_TOKEN']
-    if not API_TOKEN:
+    config = dotenv_values(".env")
+    if not "API_TOKEN" in config:
         raise ValueError(f"env var API_TOKEN is not set")
+    else:
+        API_TOKEN = config["API_TOKEN"]
 
     dp = Dispatcher(storage=MemoryStorage())
     bot = Bot(API_TOKEN)

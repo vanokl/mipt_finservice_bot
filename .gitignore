@@ -1,5 +1,5 @@
 .idea
 venv
 tmp
-finance_bot.db
+app_data/finance_bot.db
 __pycache__

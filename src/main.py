@@ -14,7 +14,7 @@ async def main():
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
     )
 
-    load_dotenv(override=True)
+    load_dotenv()
 
     API_TOKEN = os.environ['API_TOKEN']
     if not API_TOKEN:

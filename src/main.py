@@ -13,14 +13,18 @@ async def main():
         level=logging.INFO,
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
     )
-    await db_start()
-
 
     load_dotenv(override=True)
+
     API_TOKEN = os.environ['API_TOKEN']
     if not API_TOKEN:
         raise ValueError(f"env var API_TOKEN is not set")
 
+    DB_PATH = os.environ['DB_PATH']
+    if not DB_PATH:
+        raise ValueError(f"env var DB_PATH is not set")
+
+    await db_start(DB_PATH)
     dp = Dispatcher(storage=MemoryStorage())
     bot = Bot(API_TOKEN)
 

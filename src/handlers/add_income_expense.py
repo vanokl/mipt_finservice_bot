@@ -5,7 +5,7 @@ from aiogram.types import Message, ReplyKeyboardRemove
 from keyboards.kb import make_vertial_keyboard
 import sqlite3
 from handlers.common import Common, available_actions
-
+import os
 
 router = Router()
 
@@ -23,7 +23,7 @@ class AddIncomeExpense(StatesGroup):
 
 async def insert_in_db(user_id, amount, user_data):
 
-    conn = sqlite3.connect('finance_bot.db')
+    conn = sqlite3.connect(os.environ['DB_PATH'])
     cursor = conn.cursor()
     cursor.execute("INSERT INTO transactions (user_id, amount, date, description) VALUES (?, ?, CURRENT_TIMESTAMP, ?)",
                    (user_id, amount, user_data ))

@@ -5,6 +5,7 @@ from aiogram.types import Message, ReplyKeyboardRemove
 import requests
 from keyboards.kb import make_vertial_keyboard
 from handlers.common import Common, available_actions
+import os
 
 router = Router()
 

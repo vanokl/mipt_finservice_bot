@@ -27,7 +27,7 @@ async def cmd_start(message: Message, state: FSMContext):
         reply_markup=make_vertial_keyboard(available_actions)
     )
 
-    conn = sqlite3.connect('finance_bot.db')
+    conn = sqlite3.connect(os.environ['DB_PATH'])
     cursor = conn.cursor()
     cursor.execute(f"SELECT user_id from users where user_id={message.from_user.id}")
     if not cursor.fetchone():
